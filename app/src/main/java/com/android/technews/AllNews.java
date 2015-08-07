@@ -6,11 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.android.technews.adapters.NewsAdapter;
 import com.android.technews.models.Collection1;
@@ -42,10 +41,36 @@ public class AllNews extends Fragment {
         listView = (ListView) view.findViewById(R.id.all_news);
         spinner = (Spinner) view.findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+
+//        final DatabaseHandler dbHandler = new DatabaseHandler(getActivity());
+//
+//        SQLiteDatabase sqLiteDatabase = dbHandler.getReadableDatabase();
+//
+//        final Cursor cursor = sqLiteDatabase.query(DatabaseHandler.TABLE_NEWS, null, null, null, null, null, null);
+//
+//        cursor.moveToPosition(0);
+//
+//        for(int i=0; i<=20;i++){
+//            cursor.moveToPosition(i);
+//            String newsTitle = cursor.getString(cursor.getColumnIndex(DatabaseHandler.KEY_TITLE));
+//            String newsAuthor = cursor.getString(cursor.getColumnIndex(DatabaseHandler.KEY_AUTHOR));
+//            String newsTime = cursor.getString(cursor.getColumnIndex(DatabaseHandler.KEY_READTIME));
+//            String newsDate = cursor.getString(cursor.getColumnIndex(DatabaseHandler.KEY_DATE));
+//
+//
+//
+//        }
+//
+//
+//        newsAdapter = new NewsAdapter(getActivity(), musicApiResponse.getResults().getCollection1());
+//        newsList = musicApiResponse.getResults().getCollection1();
+//        listView.setAdapter(newsAdapter);
+
         NewsAPI.getApi().getMusicList(new Callback<TechNewsResponse>() {
 
             @Override
             public void success(TechNewsResponse musicApiResponse, Response response) {
+
                 newsAdapter = new NewsAdapter(getActivity(), musicApiResponse.getResults().getCollection1());
                 newsList = musicApiResponse.getResults().getCollection1();
                 listView.setAdapter(newsAdapter);

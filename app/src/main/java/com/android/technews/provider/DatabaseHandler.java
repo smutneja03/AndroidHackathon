@@ -10,7 +10,7 @@ import com.android.technews.models.News;
 /**
  * Created by smutneja03 on 07/08/15.
  */
-public class DatabaseHandler extends SQLiteOpenHelper {
+public class  DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
@@ -39,7 +39,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_TITLE + " TEXT,"
                 + KEY_AUTHOR + " TEXT,"
                 + KEY_DATE + " TEXT,"
-                + KEY_READTIME + " TEXT," + ")";
+                + KEY_READTIME + " TEXT" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 

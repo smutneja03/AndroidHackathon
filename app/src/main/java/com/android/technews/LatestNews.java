@@ -3,12 +3,14 @@ package com.android.technews;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.app.Service;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
@@ -17,14 +19,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
-import android.view.ViewGroup.LayoutParams;
 
 import com.android.technews.adapters.NewsAdapter;
 import com.android.technews.models.Collection1;
 import com.android.technews.models.TechNewsResponse;
 import com.android.technews.network.NewsAPI;
+import com.android.technews.provider.DatabaseHandler;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +71,24 @@ private LinearLayout llAnchor;
             public void success(TechNewsResponse musicApiResponse, Response response) {
                 newsAdapter = new NewsAdapter(getActivity(), musicApiResponse.getResults().getCollection1());
                 newsList = musicApiResponse.getResults().getCollection1();
+
+                //insert into database
+                DatabaseHandler newsSQLDatabaseHelper = new DatabaseHandler(getActivity());
+                SQLiteDatabase sqLiteDatabase = newsSQLDatabaseHelper.getWritableDatabase();
+
+                for (int i = 0; i < newsList.size(); i++) {
+                    String INSERT_INTO_TABLE = "INSERT INTO " + DatabaseHandler.TABLE_NEWS
+                            + "(" + DatabaseHandler.KEY_TITLE + ","
+                            + DatabaseHandler. KEY_AUTHOR+ ","
+                            + DatabaseHandler.KEY_READTIME + ","
+                            + DatabaseHandler.KEY_DATE + ")"
+                            + " VALUES (\'" + newsList.get(i).getArticleTitle() + "\',"
+                            + "\'" + newsList.get(i).getArticleAuthor() + "\',"
+                            + "\'" + newsList.get(i).getArticleReadTime() + "\',"
+                            + "\'" + newsList.get(i).getArticleDate() + "\');";
+                    sqLiteDatabase.execSQL(INSERT_INTO_TABLE);
+                }
+
                 listView.setAdapter(newsAdapter);
 
                 if (mProgressDialog.isShowing()) {
