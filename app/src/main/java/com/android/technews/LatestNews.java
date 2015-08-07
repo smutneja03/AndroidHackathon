@@ -1,7 +1,9 @@
 package com.android.technews;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +29,7 @@ public class LatestNews extends Fragment {
     private ListView listView;
     private List<Collection1> newsList = new ArrayList<>();
     private NewsAdapter newsAdapter;
-
+    private ProgressDialog mProgressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +38,8 @@ public class LatestNews extends Fragment {
         View view = inflater.inflate(R.layout.latest_news, container, false);
         listView = (ListView) view.findViewById(R.id.latest_news);
 
+        showProgressDialog();
+
         NewsAPI.getApi().getMusicList(new Callback<TechNewsResponse>() {
 
             @Override
@@ -43,6 +47,11 @@ public class LatestNews extends Fragment {
                 newsAdapter = new NewsAdapter(getActivity(), musicApiResponse.getResults().getCollection1());
                 newsList = musicApiResponse.getResults().getCollection1();
                 listView.setAdapter(newsAdapter);
+
+                if (mProgressDialog.isShowing()) {
+                    hideProgressDialog();
+                }
+
             }
 
             @Override
@@ -53,6 +62,27 @@ public class LatestNews extends Fragment {
         });
 
         return view;
+    }
+
+    private void showProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
+        }
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.getWindow().setGravity(Gravity.CENTER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setTitle("Please Wait");
+        mProgressDialog.setMessage("The news are loading...");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
+
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
+        }
     }
 
 
