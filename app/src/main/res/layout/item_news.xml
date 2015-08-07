@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/news_title"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="15sp"
         tools:text="ARPIT" />
 
     <LinearLayout
@@ -23,7 +23,7 @@
         android:background="#000000"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="3dp">
 
         <TextView
             android:id="@+id/news_date"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="#FFFFFF"
-            android:textSize="18dp"
+            android:textSize="12dp"
             tools:text="DATE" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="#FFFFFF"
-            android:textSize="18dp"
+            android:textSize="12dp"
             tools:text="Read Time" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="#FFFFFF"
-            android:textSize="18dp"
+            android:textSize="12dp"
             tools:text="Author" />
     </LinearLayout>
 </LinearLayout>
