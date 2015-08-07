@@ -4,6 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_padding="3dp"
+        android:entries="@array/country_arrays"
+
+        />
+
     <ListView
         android:id="@+id/all_news"
         android:layout_width="match_parent"

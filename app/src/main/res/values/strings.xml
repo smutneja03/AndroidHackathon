@@ -6,5 +6,11 @@
 
     <string name="welcome">Welcome!</string>
 
+    <string-array name="country_arrays">
+        <item>Filter by</item>
+        <item>Date</item>
+        <item>Author</item>
+        <item>Read Time</item>
+    </string-array>
 
 </resources>

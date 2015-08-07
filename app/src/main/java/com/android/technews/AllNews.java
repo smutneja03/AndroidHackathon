@@ -5,7 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.android.technews.adapters.NewsAdapter;
 import com.android.technews.models.Collection1;
@@ -24,6 +29,7 @@ import retrofit.client.Response;
  */
 public class AllNews extends Fragment {
 
+    private Spinner spinner;
     private ListView listView;
     private List<Collection1> newsList = new ArrayList<>();
     private NewsAdapter newsAdapter;
@@ -34,7 +40,8 @@ public class AllNews extends Fragment {
 
         View view = inflater.inflate(R.layout.all_news, container, false);
         listView = (ListView) view.findViewById(R.id.all_news);
-
+        spinner = (Spinner) view.findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
         NewsAPI.getApi().getMusicList(new Callback<TechNewsResponse>() {
 
             @Override
@@ -52,5 +59,20 @@ public class AllNews extends Fragment {
         });
 
         return view;
+    }
+
+    public class CustomOnItemSelectedListener implements OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            Toast.makeText(parent.getContext(),
+                    "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString(),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            // TODO Auto-generated method stub
+        }
+
     }
 }

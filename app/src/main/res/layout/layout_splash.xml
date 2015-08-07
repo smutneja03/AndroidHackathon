@@ -32,5 +32,13 @@
             android:gravity="center"
             android:textSize="60sp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="by Arpit and Sahil"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:textSize="30sp" />
+
     </LinearLayout>
 </LinearLayout>
