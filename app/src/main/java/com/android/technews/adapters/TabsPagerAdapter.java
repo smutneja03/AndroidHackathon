@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.android.technews.AllNews;
+import com.android.technews.LatestNews;
+
 /**
  * Created by smutneja03 on 07/08/15.
  */
@@ -25,7 +28,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
         return null;
 
-        return null;
     }
 
     @Override
