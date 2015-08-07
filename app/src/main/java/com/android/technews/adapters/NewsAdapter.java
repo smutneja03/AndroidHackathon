@@ -77,7 +77,7 @@ public class NewsAdapter extends BaseAdapter{
         viewHolder.newsTitle.setText(news.getArticleTitle().getText());
         viewHolder.newsAuthor.setText(news.getArticleAuthor().getText());
         viewHolder.newsReadTime.setText(news.getArticleReadTime());
-        viewHolder.newsPublishedDate.setText(news.getArticleReadTime());
+        viewHolder.newsPublishedDate.setText(news.getArticleDate());
 
         return view;
     }
